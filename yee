@@ -1,0 +1,359 @@
+import time
+
+answer_B = ("B", "b")
+answer_C = ("C", "c")
+yes = ("Y", "y", "yes", "Yes", "YES")
+no = ("N", "n", "no", "No", "NO")
+
+Gold = 0
+sword = 0
+berries_and_cream = 0
+required = ("\nUse only A, B, or C\n")
+
+
+class players:
+    def __init__(self, name, health=0, gold=0, hitPercent=0):
+        self.name = name
+        self.health = health
+        self.gold = gold
+        self.hitPercent = hitPercent
+
+
+def superTed(name):
+    if name == "superTedName":
+        return True
+    else:
+        return False
+
+
+superTedName = "TED"
+players = ["MILKBOI", "TOTALLYPRO", "EGGS"]
+weapons = ["LIME", "ORANGE", "LEMON"]
+weaponDamageMorning = {"LIME": 25, "ORANGE": 30, "LEMON": 40}
+weaponDamageMidday = {"LIME": 30, "ORANGE": 40, "LEMON": 50}
+weaponDamageAfternoon = {"LIME": 25, "ORANGE": 30, "LEMON": 40}
+weaponDamageEvening = {"LIME": 25, "ORANGE": 30, "LEMON": 40}
+weaponDamageTedSpecial = {"LIME": 60, "ORANGE": 65, "LEMON": 70}
+
+#-------------------------------^Variables^----------------------------#
+
+
+def showCredits():
+    print("...sussus...ඩ ...amogus...")
+    print(
+        "HELLO, THIS GAME IS CREATED BY TED AND XAVIER AND MIKHAIL AND YOUR MOTHER."
+    )
+    time.sleep(1)
+    print("DON'T FORGET TO CAPITALIZE THE 1ST LETTERS OF YOUR WORDS...")
+    time.sleep(1)
+    print("press enter to begin")
+    input()
+
+
+def welcomePlayer():
+    localPlayerName = (input("Whats your name my child?: \n")).upper()
+    print("ok", localPlayerName)
+    time.sleep(1)
+    print("thats your name from now on \n")
+    time.sleep(1)
+
+
+def evaluateBoolean(boolInput):
+    if boolInput.upper() in {"Y", "YE", "YES", "SI", "OUI", "TRUE"}:
+        return True
+    else:
+        return False
+
+
+def registerPlayer(name):
+    if name == players[0]:
+        print("Happy birthday (～￣▽￣)～")
+        return "Player(name, 125 , 0 , random.randint(1, 2))"
+    elif name == players[1]:
+        print("get in the van (°ー°〃)")
+        return "Player(name, 100 , 0, random.randint(1, 1))"
+    elif name == players[2]:
+        print("'╰（‵□′）╯'")
+        return "Player(name, 100 , 20, random.randint(1, 2))"
+    else:
+        print("'ƪ( ` ▿▿▿▿ ´ ƪ)'")
+        return "Player(name, 100, 0, random.randint(1, 2))"
+
+
+def chooseWeapon():
+    localWeapon = (input("Lime \nOrange \nLemon \n")).upper()
+    if localWeapon in weapons:
+        return localWeapon
+    else:
+        return "ok"
+
+
+# THE LOGIC STARTS HERE
+
+t = int(time.strftime("%H"))
+showCredits()
+playerName = welcomePlayer()
+currentPlayer = registerPlayer(playerName)
+
+print("currentPlayer.name")
+print("currentPlayer.health")
+print("currentPlayer.gold")
+print("currentPlayer.hitPercent")
+
+print("You see a wooden box sitting on top of the bedside table next to you")
+time.sleep(1)
+print(
+    "You pick it up and look inside, you see 3 different fruits, which one do you pick up?"
+)
+time.sleep(2)
+print()
+
+weapon = ""
+weaponDamage = 0
+
+while weapon == "":
+    weapon = chooseWeapon()
+
+    if weapon != "":
+        if superTed("currentPlayer.name"):
+            weaponDamage = weaponDamageTedSpecial[weapon]
+        else:
+            if t < 10:
+                weaponDamage = weaponDamageMorning[weapon]
+            elif t >= 10 and t < 14:
+                weaponDamage = weaponDamageMidday[weapon]
+            elif t >= 14 and t < 18:
+                weaponDamage = weaponDamageAfternoon[weapon]
+            else:
+                weaponDamage = weaponDamageEvening[weapon]
+
+    print("You are approached by a Shrek")
+
+    toFight = evaluateBoolean(input("Do you want to fight it?"))
+
+    if toFight:
+        print("Good choice")
+
+        fightActive = True
+        shrekHealth = 10
+
+        while fightActive:
+            if "currentPlayer.hitPercent" == 1:
+                shrekHealth -= weaponDamage
+
+                if shrekHealth < 0:
+                    print("* Shrek dies *")
+                    fightActive = False
+            else:
+                fightActive = False
+    else:
+        print("Tough luck")
+
+    print("Game over")
+
+
+def intro():
+    print("boop \n\n")
+    time.sleep(1)
+    print(
+        "*you are teleported to a bus stop where a man dressed in 18th century fashion is harrassing a pair of youths \n"
+    )
+    time.sleep(2)
+    print("*he approaches you*")
+    time.sleep(1)
+    print("'do you have any berries and cream?'")
+    time.sleep(1)
+    print("your response?")
+    time.sleep(1)
+    print("""  A. Challenge him to a dance battle
+  B. Say you don't have any
+  C. Run""")
+    choice = input(">>> ")
+    if choice in answer_A:
+        option_dance()
+    elif choice in answer_B:
+        print(
+            "\n The little lad tries to strangle you. \n \n But you escape to fight another day. \n \n you do not gain any gold. "
+        )
+    elif choice in answer_C:
+        option_run()
+    else:
+        print(required)
+        intro()
+
+
+def option_dance():
+    print(
+        "\n The little lad is surprised. He steps closer to fully assess such a brave competetor.. "
+        "Will you:")
+    time.sleep(1)
+    print("""  A. Run
+  B. Challenge him again
+  C. Try to hide behind a bin""")
+    choice = input(">>> ")
+    if choice in answer_A:
+        option_run()
+    elif choice in answer_B:
+        print(
+            "\nThe Little Lad laughs at you. How could you be so stupid? Your fortnite emotes are strong, but none are so powerful as The Little Lad dance. You lose the dance battle. \n\nYou died of the humiliation \n \n minus 5 gold"
+        )
+        Gold - 5
+    elif choice in answer_C:
+        option_hide()
+    else:
+        print(required)
+        option_dance()
+
+
+def option_hide():
+    print("\n You find a sword in the bin. do you take it? \n yes?\n no?")
+    choice = input(">>> ")
+    if choice in yes:
+        sword = 1
+    else:
+        sword = 0
+    print("\n What will you do now")
+    time.sleep(1)
+    print("""  A. Keep hiding
+  B. Stab the little lad
+  C. Run""")
+    choice = input(">>> ")
+    if choice in answer_A:
+        print(
+            "\n Bad choice. The little lad spots you. He shoots you in the eye with a pencil slingshot.\n\nYou die of bloodloss. \n \n minus 5 gold"
+        )
+        Gold - 5
+    elif choice in answer_B:
+        if sword > 0:
+            print(
+                "\nYou sit behind the bin until the little lad spots you. You stab him in the stomach. \n\n you win. \n \n plus 5 gold"
+            )
+            Gold + 5
+        else:
+            print(
+                "\n silly goose, you should have taken the sword! the Little Lad bites you and you contract rabies. \n\n you die alone at the busstop. \n \n minus 5 gold"
+            )
+            Gold - 5
+    elif choice in answer_C:
+        print(
+            "You try running away without trace, but the Little Lad sees you.")
+        option_run()
+    else:
+        print(required)
+        option_hide()
+
+
+def option_run():
+    print(
+        "\nYou're a speedy lil bitch, but you're no match for the little lad's speed. He runs Naruto style.. You will:"
+    )
+    time.sleep(1)
+    print("""  A. Hide behind a bin
+  B. Have a dance battle
+  C. Run towards the approaching bus""")
+    choice = input(">>> ")
+    if choice in answer_A:
+        print("Little lad spots you easily.. "
+              "\n\n He stabs you. RIP \n \n minus 5 gold")
+        Gold - 5
+    elif choice in answer_B:
+        print("\n You do the renegade, were you in a silly goofy mood? (¬_¬) "
+              "\n\n Little Lad beats you easily. RIP. \n \n minus 5 gold")
+        Gold - 5
+
+    elif choice in answer_C:
+        option_town()
+    else:
+        print(required)
+        option_run()
+
+
+def option_town():
+    print(
+        "\n while running, you notice an unopened packet of berries and cream starburst. Do you take it? \n yes? \n no?"
+    )
+    choice = input(">>> ")
+    if choice in yes:
+        berries_and_cream = 1
+    else:
+        berries_and_cream = 0
+    print("you hear the Little Lad approach")
+    time.sleep(1)
+    if berries_and_cream > 0:
+        print(
+            "\n You give the little lad the berries and cream starburst."
+            "\n\n He invites you to dance with him.. You survived! \n \n plus 5 gold"
+        )
+        Gold + Gold + 5
+    else:
+        print("\nMaybe you should have picked up the berries and cream.. "
+              "\n\nYou died! \n \n minus 5 gold")
+        Gold - 5
+
+
+intro()
+
+print("after your epic battle with little lad you sit down on the floor")
+print("he walks over to you with the rain hitting his 18th century clothes")
+print("he tells you about his mother")
+print("she is gone now")
+print("*little lad cries*")
+print("*little lad starts dancing*")
+print("*little lad starts eating your toes*")
+print("*the little lad takes your phone*")
+print("*he dials a number*")
+print("*he orders pizza*")
+print("'do you want pineapple on that?'")
+
+piss = input("Yes/No")
+if piss == ("Yes"):
+  print("'you disgust me. no pineapple.'")
+if piss == ("No"):
+  print("'icon behavior'")
+
+answer_yes = ["Yes", "Y", "yes", "y"]
+answer_no = ["No", "N", "no", "n"]
+
+print("""
+
+after your pizza arrives, gordon ramsay comes speeding up to you on a moped.\n
+he looks at your pizza and says \n
+this isn't pizza, this is a mistake. This is an Italian Tragedy
+\n
+come to my kitchen and i'll show real pizza.
+Will you go with him.(Yes / No)
+""")
+
+ans1 = input(">>")
+
+if ans1 in answer_yes:
+    print("\n gordon takes you to his kitchen and says he needs some lamb sauce. do you search for it?")
+    ("Yes / No)\n")
+
+    ans2 = input(">>")
+
+    if ans2 in answer_yes:
+        print("\nyou find the lamb sauce, and he makes you some really good pizza. you win.")
+
+    elif ans2 in answer_no:
+        print("\nhe comes looking for the lamb sauce\n WHERE'S THE LAMB SAUCE")
+
+    else:
+        print("\nYou typed the wrong input. DUMBASS, game over.")
+
+elif ans1 in answer_no:
+    print("\nhe insists that you go with him. he tries hitting you with bread. do you throw rocks in his eyes?(Yes / No)\n")
+
+    ans3 = input(">>")
+
+    if ans3 in answer_yes:
+        print("\ngo off ig, you slayed gordon. ")
+
+    elif ans3 in answer_no:
+        print("\nBAD MOVE: he hits you with a baguette and you die!")
+
+    else:
+        print("\nsussy baka smh, that's the wrong input. RIP!")
+
+else:
+    print("\nwrong input! dumbass! RIP!")
